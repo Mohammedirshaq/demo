@@ -2,9 +2,9 @@ pipeline {
     agent any
     environment {
         ZONE = "us-central1-c"
-        IMAGE_NAME = "sample1"
+        IMAGE_NAME = "demo"
        
-        CLUSTER_NAME = "cluster-2"
+        CLUSTER_NAME = "cluster-3"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
         DEPLOY_YAML = "frontend.yaml"
     }
@@ -31,14 +31,14 @@ pipeline {
             steps {
                 sh '''
                 docker build -t "$IMAGE_NAME" .
-                docker tag "$IMAGE_NAME" ganesh6498/$IMAGE_NAME:$BUILD_NUMBER
+                docker tag "$IMAGE_NAME" mdirshaq/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
         stage('docker push') {
             steps {
                 sh '''
-                docker push ganesh6498/$IMAGE_NAME:$BUILD_NUMBER
+                docker push mdirshaq/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
@@ -47,7 +47,7 @@ pipeline {
                 script {
                     echo 'Updating deployment YAML with the latest Docker image...'
                     sh """
-                    sed -i 's|image: .*|image: ganesh6498/${IMAGE_NAME}:${BUILD_NUMBER}|' ${DEPLOY_YAML}
+                    sed -i 's|image: .*|image: mdirshaq/${IMAGE_NAME}:${BUILD_NUMBER}|' ${DEPLOY_YAML}
                     """
                 }
             }
@@ -67,7 +67,7 @@ pipeline {
                 retry(3) {
                     sh '''  
                     sleep 10
-                    gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project sam-453310
+                    gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project valued-decker-453309-a2
                     '''
                 }
             }
