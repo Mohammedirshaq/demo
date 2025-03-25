@@ -5,7 +5,7 @@ pipeline {
         IMAGE_NAME = "demo"
        
         CLUSTER_NAME = "cluster-3"
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-irshaq')
         DEPLOY_YAML = "frontend.yaml"
     }
     stages {
