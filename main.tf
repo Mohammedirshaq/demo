@@ -1,6 +1,6 @@
 provider "google" {
   zone = var.region
-  project = "sam-453310"
+  project = "valued-decker-453309-a2"
 }
 
 resource "google_container_cluster" "primary" {
