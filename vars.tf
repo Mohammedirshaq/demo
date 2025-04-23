@@ -5,7 +5,7 @@ variable "region" {
     default = "us-central1-c"
 }
 variable "node_count" {
-    default = "2"
+    default = "1"
 }
 variable "node_machine_type" {
   description = "The type of machine to use for nodes in the Kubernetes cluster"
